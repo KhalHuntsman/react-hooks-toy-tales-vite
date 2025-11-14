@@ -27,6 +27,15 @@ function App() {
   function handleDeleteToy(id) {
     setToys((prevToys) => prevToys.filter((toy) => toy.id !== id));
   }
+  
+  // Update toy in state
+  function handleUpdateToy(updatedToy) {
+  setToys((prevToys) =>
+    prevToys.map((toy) =>
+      toy.id === updatedToy.id ? updatedToy : toy
+    )
+  );
+}
 
   return (
     <>
