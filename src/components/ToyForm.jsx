@@ -1,18 +1,21 @@
 import React, { useState } from "react";
 
 function ToyForm({ onAddToy }) {
+  // Controlled input state for the form fields
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
 
   function handleSubmit(e) {
-    e.preventDefault();
+    e.preventDefault(); // Prevent page reload
 
+    // The backend expects likes to start at 0
     const newToy = {
       name: name,
       image: image,
       likes: 0
     };
 
+    // POST to backend to create new toy
     fetch("http://localhost:3001/toys", {
       method: "POST",
       headers: {
@@ -22,9 +25,10 @@ function ToyForm({ onAddToy }) {
     })
       .then((r) => r.json())
       .then((savedToy) => {
-        onAddToy(savedToy); // ⭐ Add to state in App
+        // Add the newly created toy into App state
+        onAddToy(savedToy);
 
-        // Clear form fields after success
+        // Clear form inputs
         setName("");
         setImage("");
       });
@@ -35,6 +39,7 @@ function ToyForm({ onAddToy }) {
       <form className="add-toy-form" onSubmit={handleSubmit}>
         <h3>Create a toy!</h3>
 
+        {/* Controlled input for toy name */}
         <input
           type="text"
           name="name"
@@ -45,6 +50,7 @@ function ToyForm({ onAddToy }) {
         />
         <br />
 
+        {/* Controlled input for toy image URL */}
         <input
           type="text"
           name="image"
