@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Header from "./Header";
 import ToyForm from "./ToyForm";
@@ -11,6 +11,12 @@ function App() {
     setShowForm((showForm) => !showForm);
   }
 
+  useEffect(() => {
+    fetch("http://localhost:3001/toys")
+    .then((r) => r.json())
+    .then((toyData) => setToys(toyData));
+  }, []);
+  
   return (
     <>
       <Header />
