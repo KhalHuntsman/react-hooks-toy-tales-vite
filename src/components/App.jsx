@@ -18,9 +18,14 @@ function App() {
       .then((toyData) => setToys(toyData));
   }, []);
 
-  // ⭐ Add a toy to state
+  // Add a toy to state
   function handleAddToy(newToy) {
     setToys((prevToys) => [...prevToys, newToy]);
+  }
+
+  // Remove toy from state
+  function handleDeleteToy(id) {
+    setToys((prevToys) => prevToys.filter((toy) => toy.id !== id));
   }
 
   return (
